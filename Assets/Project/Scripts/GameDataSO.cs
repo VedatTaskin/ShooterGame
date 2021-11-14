@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "GameData",menuName = "GameData/GameData")]
-public class GameData : ScriptableObject
+public class GameDataSO : ScriptableObject
 {
     public int SizeScaleFactor;
     public float ExplosionTimer;

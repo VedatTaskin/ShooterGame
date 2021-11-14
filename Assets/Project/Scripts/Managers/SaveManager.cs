@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    public static void SaveData(GameData gameData)
+    public static void SaveData(GameDataSO gameData)
     {
         string dataString = JsonUtility.ToJson(gameData);
         PlayerPrefs.SetString("data", dataString);
     }
 
-    public static void LoadData(GameData gameData)
+    public static void LoadData(GameDataSO gameData)
     {
         if (!PlayerPrefs.HasKey("data"))
         {

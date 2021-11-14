@@ -6,7 +6,7 @@ public class BulletBehaviour : MonoBehaviour
 {
     // Bir merminin özeliklerini burada deðiþtireceðiz.
     //merminin tek atýþta kaç kere çaðrýlacaðý baþka yerde
-    public float explosionTimer;
+    [HideInInspector] public float explosionTimer;
 
 
     private void OnEnable()

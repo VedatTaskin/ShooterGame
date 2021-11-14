@@ -15,7 +15,7 @@ public class MenuControl : MonoBehaviour
     [SerializeField] Slider timerSlider;
     [SerializeField] Text timerText;
 
-    [SerializeField] private GameData data;
+    [SerializeField] private GameDataSO data;
 
     private void Start()
     {

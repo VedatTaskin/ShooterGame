@@ -7,7 +7,7 @@ public class PoolManager : MonoBehaviour
     public int count = 10;
     public string name = "x";
     public List<GameObject> bulletList;
-    public GameData data;
+    public GameDataSO data;
 
     void Awake()
     {
