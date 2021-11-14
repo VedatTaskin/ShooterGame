@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,17 @@ using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
 
-    [SerializeField] private Transform playerTransform; 
+    private Transform playerTransform;
+    private GameObject bulletPool;
     private float mouseSensitivity = 200f;
     private float xRotation = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
     }
 
     // Update is called once per frame
