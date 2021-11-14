@@ -5,13 +5,13 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     // Bir merminin özeliklerini burada deðiþtireceðiz.
-    //merminin tek atýþta kçe kere çaðrýlacaðý baþka yerde
+    //merminin tek atýþta kaç kere çaðrýlacaðý baþka yerde
+    public float explosionTimer;
 
-    public float bulletLifeTime = 1f;
 
     private void OnEnable()
     {
-        Invoke("OnDisable", 5);
+        Invoke("OnDisable", explosionTimer);
     }
 
     private void OnDisable()

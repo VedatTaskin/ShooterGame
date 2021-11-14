@@ -599,9 +599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5690d15ead1bae40822d1a2592f2296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 5
+  count: 10
   name: Bullet
   bulletList: []
+  data: {fileID: 11400000, guid: d07422dbd111b024da5b62b9a2e34900, type: 2}
 --- !u!4 &1227851169
 Transform:
   m_ObjectHideFlags: 0
@@ -731,7 +732,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePlayPanel: {fileID: 1068711262}
   bulletCounterText: {fileID: 19938486}
-  settingsPanel: {fileID: 0}
 --- !u!1 &1508797717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabf4b69eaf5ea54f97c0f24ff85a9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfBulletPerOneShot: 3
+  numberOfBulletPerOneShot: 5
   attackRate: 1
 --- !u!1 &3832703584145146510
 GameObject:

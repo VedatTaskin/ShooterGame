@@ -7,19 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class MenuControl : MonoBehaviour
 {
-    public string color;
-    public int sizeScale;
-    public float explosionTimer;
+    [HideInInspector] public string color;
+    [HideInInspector] public int sizeScale;
+    [HideInInspector] public float explosionTimer;
     [SerializeField] Button colorButton;
     [SerializeField] Text sizeScaleText;
     [SerializeField] Slider timerSlider;
     [SerializeField] Text timerText;
 
+    [SerializeField] private GameData data;
+
     private void Start()
     {
-        color = PlayerPrefs.GetString("Color");
-        sizeScale = PlayerPrefs.GetInt("SizeScale");
-        explosionTimer = PlayerPrefs.GetFloat("ExplosionTimer");
+        color = data.Color;
+        sizeScale = data.SizeScaleFactor;
+        explosionTimer = data.ExplosionTimer;
 
 
         // set color
@@ -43,9 +45,10 @@ public class MenuControl : MonoBehaviour
 
     public void StartGame()
     {
-        PlayerPrefs.SetString("Color", color);
-        PlayerPrefs.SetInt("SizeScale", sizeScale);
-        PlayerPrefs.SetFloat("ExplosionTimer", explosionTimer);
+        data.Color = color;
+        data.SizeScaleFactor = sizeScale;
+        data.ExplosionTimer = explosionTimer;
+        SaveManager.SaveData(data);
         SceneManager.LoadScene("Level 1");
     }
 

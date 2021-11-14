@@ -36,8 +36,11 @@ public class ShootControl : MonoBehaviour
         for (int i = 0; i < numberOfBulletPerOneShot; i++)
         {
             TakeBulletFromPool();
-            Shoot();
-            yield return new WaitForSeconds(attackRate / numberOfBulletPerOneShot);
+            Shoot();            
+            yield return new WaitForSeconds(0.1f);
+
+            //maybe we want to set the shoot time interval according to attackRate
+            //yield return new WaitForSeconds(attackRate / numberOfBulletPerOneShot); 
         }
 
     }
@@ -59,7 +62,7 @@ public class ShootControl : MonoBehaviour
             {
                 if (i==pool.bulletList.Count-1)
                 {
-                    GameObject newBullet = Instantiate(Resources.Load(pool.name, typeof(GameObject)), pool.transform) as GameObject;
+                    GameObject newBullet = Instantiate(pool.bulletList[i], pool.transform) as GameObject;
                     newBullet.SetActive(false);
                     pool.bulletList.Add(newBullet);
                 }
