@@ -8,26 +8,38 @@ public class ShootControl : MonoBehaviour
     Transform gunPoint;
     GameObject currentBullet;
     PoolManager pool;
+    float nextFire;
 
-    private void Awake()
-    {
-        gunPoint = transform.GetChild(0).transform;   
-        
-    }
+    [Header("Bullet Settings")]
+    public int numberOfBulletPerOneShot = 3; // how many bullet will be instaniated for each click
+    public float attackRate = 3;            // according to attackrate we will change the time between shots;
+ 
 
     private void Start()
     {
-        pool = GameObject.FindObjectOfType<PoolManager>();       
+        pool = GameObject.FindObjectOfType<PoolManager>();
+        gunPoint = transform.GetChild(0).transform;
 
     }
 
     private void Update()
     {    
     
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && CanWeShoot())
         {
-            TakeBulletFromPool();       
+            StartCoroutine(ShootPlaner());
         }
+    }
+
+    IEnumerator ShootPlaner()
+    {
+        for (int i = 0; i < numberOfBulletPerOneShot; i++)
+        {
+            TakeBulletFromPool();
+            Shoot();
+            yield return new WaitForSeconds(attackRate / numberOfBulletPerOneShot);
+        }
+
     }
 
     private void TakeBulletFromPool()
@@ -55,5 +67,25 @@ public class ShootControl : MonoBehaviour
         }
     }
 
+    void Shoot()
+    {
+        // shoot doen't work :(
+
+        //Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+        //Debug.DrawRay(transform.position, forward, Color.green);
+        //currentBullet.GetComponent<Rigidbody>().AddRelativeForce(gunPoint.transform.localPosition., ForceMode.Impulse);
+
+        UIController.Instance.SetBulletCount(1);
+    }
+
+    bool CanWeShoot()
+    {
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + attackRate; // belli aralýklarla ateþ edilebilecek "fireRate kontrol ediyor"
+            return true;
+        }
+        else return false;
+    }
 
 }

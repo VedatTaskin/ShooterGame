@@ -14,11 +14,6 @@ public class BulletBehaviour : MonoBehaviour
         Invoke("OnDisable", 5);
     }
 
-    private void Start()
-    {
-        GetComponent<Rigidbody>().AddForce(-Vector3.forward, ForceMode.Impulse);        
-    }
-
     private void OnDisable()
     {
         transform.gameObject.SetActive(false);

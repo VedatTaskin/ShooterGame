@@ -21,8 +21,14 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 moveDirection = (Vector3.forward * zAxis) + (Vector3.right * xAxis);
 
-        transform.Translate(moveDirection*speed * Time.deltaTime,Space.Self);
-
+        if (Vector3.SqrMagnitude (moveDirection) >0.1f)
+        {
+            transform.Translate(moveDirection * speed * Time.deltaTime, Space.Self);
+        }
+        else
+        {
+            transform.position = transform.position;
+        }
     }
 }
 
