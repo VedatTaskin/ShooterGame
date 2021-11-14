@@ -5,15 +5,13 @@ using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
 
-    private Transform playerTransform;
+    [SerializeField] private Transform playerTransform; 
     private float mouseSensitivity = 200f;
-
     private float xRotation = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerTransform = GetComponentInParent<Transform>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -32,12 +30,10 @@ public class MouseLook : MonoBehaviour
 
     void LookUpAndDown()
     {
-        // I didin't understand why this is not working :(
-        //float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        //xRotation -= mouseY;
-        //xRotation = Mathf.Clamp(xRotation, -30f, 30f);
-        //this.gameObject.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -30f, 30f);
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
 
 }
