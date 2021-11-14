@@ -75,7 +75,7 @@ public class ShootControl : MonoBehaviour
         //Debug.DrawRay(transform.position, forward, Color.green);
         //currentBullet.GetComponent<Rigidbody>().AddRelativeForce(gunPoint.transform.localPosition., ForceMode.Impulse);
 
-        UIController.Instance.SetBulletCount(1);
+        UIManager.Instance.SetBulletCount(1);
     }
 
     bool CanWeShoot()
