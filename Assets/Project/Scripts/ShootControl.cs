@@ -54,6 +54,8 @@ public class ShootControl : MonoBehaviour
                 currentBullet = pool.bulletList[i].gameObject;
                 currentBullet.transform.position = gunPoint.position;
                 currentBullet.transform.rotation = gunPoint.rotation;
+                currentBullet.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                currentBullet.gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                 currentBullet.SetActive(true);
                 break;
             }
@@ -72,12 +74,9 @@ public class ShootControl : MonoBehaviour
 
     void Shoot()
     {
-        // shoot doen't work :(
-
-        //Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        //Debug.DrawRay(transform.position, forward, Color.green);
-        //currentBullet.GetComponent<Rigidbody>().AddRelativeForce(gunPoint.transform.localPosition., ForceMode.Impulse);
-
+        //it works :)
+        float bulletVelocity = 10;
+        currentBullet.GetComponent<Rigidbody>().AddForce(gunPoint.transform.right * bulletVelocity, ForceMode.VelocityChange);
         UIManager.Instance.SetBulletCount(1);
     }
 
