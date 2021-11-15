@@ -8,10 +8,24 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
+    private bool isSettingPanelActive;
+
+    private void OnEnable()
+    {
+        EventManager.isSettingPanelActive += CanMove;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.isSettingPanelActive -= CanMove;
+    }
 
     void FixedUpdate()
     {
-        Move();
+        if (!isSettingPanelActive)
+        {
+            Move();
+        }        
     }
 
     void Move()
@@ -29,6 +43,11 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = transform.position;
         }
+    }
+
+    void CanMove(bool value)
+    {
+        isSettingPanelActive = value;
     }
 }
 

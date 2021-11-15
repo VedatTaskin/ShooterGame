@@ -28,4 +28,8 @@ public class BulletBehaviour : MonoBehaviour
         transform.gameObject.SetActive(false);
     }
 
+    private void OnTriggerEnter()
+    {
+        transform.gameObject.SetActive(false);
+    }
 }

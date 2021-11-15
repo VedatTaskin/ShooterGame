@@ -10,11 +10,22 @@ public class MouseLook : MonoBehaviour
     private GameObject bulletPool;
     private float mouseSensitivity = 200f;
     private float xRotation = 0;
+    private bool isSettingPanelActive;
+
+    private void OnEnable()
+    {
+        EventManager.isSettingPanelActive += CanLook;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.isSettingPanelActive -= CanLook;
+    }
 
     // Start is called before the first frame update
     void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
@@ -22,8 +33,12 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        LookRightAndLeft();
-        LookUpAndDown();    
+        if (!isSettingPanelActive)
+        {
+            LookRightAndLeft();
+            LookUpAndDown();
+        }
+   
     }
 
     void LookRightAndLeft()
@@ -38,6 +53,11 @@ public class MouseLook : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -30f, 30f);
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+    }
+
+    void CanLook(bool value)
+    {
+        isSettingPanelActive = value;
     }
 
 }

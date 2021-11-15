@@ -22,8 +22,12 @@ public class MenuControl : MonoBehaviour
     [SerializeField] Text explosionActivateButtonText;
 
 
+    PoolManager pool;
+
     private void Start()
     {
+        pool = GameObject.FindObjectOfType<PoolManager>();
+
         color = data.Color;
         sizeScale = data.SizeScaleFactor;
         explosionTimer = data.ExplosionTimer;
@@ -62,14 +66,15 @@ public class MenuControl : MonoBehaviour
 
     }
 
-    public void StartGame()
+    public void Accept()
     {
         data.Color = color;
         data.SizeScaleFactor = sizeScale;
         data.ExplosionTimer = explosionTimer;
         data.ExplosionTimerIsActive = explosionTimerIsActive;
         SaveManager.SaveData(data);
-        SceneManager.LoadScene("Level 1");
+        pool.InstantiateBullet(0, pool.bulletList.Count*5); // change bullet in the pool
+
     }
 
     public void ChangeColor()

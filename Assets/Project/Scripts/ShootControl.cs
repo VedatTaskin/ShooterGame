@@ -13,21 +13,38 @@ public class ShootControl : MonoBehaviour
     [Header("Bullet Settings")]
     public int numberOfBulletPerOneShot = 3; // how many bullet will be instaniated for each click
     public float attackRate = 3;            // according to attackrate we will change the time between shots;
- 
+    public float bulletSpeed = 20;
+    private float screenHeight;
+    private bool isSettingPanelActive;
+
+    private void OnEnable()
+    {
+        EventManager.isSettingPanelActive += SettingPanelStatus;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.isSettingPanelActive -= SettingPanelStatus;
+    }
 
     private void Start()
     {
         pool = GameObject.FindObjectOfType<PoolManager>();
         gunPoint = transform.GetChild(0).transform;
-
+        screenHeight = Screen.height;
     }
 
     private void Update()
-    {    
-    
-        if (Input.GetMouseButtonDown(0) && CanWeShoot())
+    {
+        if (!isSettingPanelActive)
         {
-            StartCoroutine(ShootPlaner());
+            if (Input.mousePosition.y < screenHeight * 0.8f)
+            {
+                if (Input.GetMouseButtonDown(0) && CanWeShoot())
+                {
+                    StartCoroutine(ShootPlaner());
+                }
+            }
         }
     }
 
@@ -74,9 +91,7 @@ public class ShootControl : MonoBehaviour
 
     void Shoot()
     {
-        //it works :)
-        float bulletVelocity = 10;
-        currentBullet.GetComponent<Rigidbody>().AddForce(gunPoint.transform.right * bulletVelocity, ForceMode.VelocityChange);
+        currentBullet.GetComponent<Rigidbody>().AddForce(gunPoint.transform.right * bulletSpeed, ForceMode.VelocityChange);
         UIManager.Instance.SetBulletCount(1);
     }
 
@@ -88,6 +103,11 @@ public class ShootControl : MonoBehaviour
             return true;
         }
         else return false;
+    }
+
+    void SettingPanelStatus( bool value)
+    {
+        isSettingPanelActive = value;
     }
 
 }

@@ -16,6 +16,7 @@ public class PoolManager : MonoBehaviour
 
     public void InstantiateBullet(int startPos, int numberOfBullet)
     {
+        
         for (int i = startPos; i < numberOfBullet; i++)
         {
             GameObject instance = Instantiate(Resources.Load(name, typeof(GameObject)), transform) as GameObject;
@@ -38,7 +39,7 @@ public class PoolManager : MonoBehaviour
             }
 
             instance.SetActive(false);
-            bulletList.Add(instance);
+            bulletList.Insert(i, instance);
         }
 
     }
