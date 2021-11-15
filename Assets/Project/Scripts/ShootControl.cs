@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ShootControl : MonoBehaviour
 {
-    Transform gunPoint;
-    GameObject currentBullet;
+    protected Transform gunPoint;
+    protected GameObject currentBullet;
     PoolManager pool;
     float nextFire;
 
@@ -89,7 +89,7 @@ public class ShootControl : MonoBehaviour
         }
     }
 
-    void Shoot()
+    protected virtual void Shoot()
     {
         currentBullet.GetComponent<Rigidbody>().AddForce(gunPoint.transform.right * bulletSpeed, ForceMode.VelocityChange);
         UIManager.Instance.SetBulletCount(1);
