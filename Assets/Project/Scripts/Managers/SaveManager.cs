@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// I didn't write this, used directly
+
 public class SaveManager : MonoBehaviour
 {
     public static void SaveData(GameDataSO gameData)

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
-    // Bir merminin özeliklerini burada deðiþtireceðiz.
-    //merminin tek atýþta kaç kere çaðrýlacaðý baþka yerde
+    //We change some bullet features in here
     [HideInInspector] public float explosionTimer;
     [HideInInspector] public bool explosionTimerIsActive; 
 

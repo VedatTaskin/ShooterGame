@@ -7,8 +7,7 @@ public class MouseLook : MonoBehaviour
 {
 
     private Transform playerTransform;
-    private GameObject bulletPool;
-    private float mouseSensitivity = 200f;
+    public float mouseSensitivity = 200f;
     private float xRotation = 0;
     private bool isSettingPanelActive;
 
@@ -22,7 +21,6 @@ public class MouseLook : MonoBehaviour
         EventManager.isSettingPanelActive -= CanLook;
     }
 
-    // Start is called before the first frame update
     void Awake()
     {
         //Cursor.lockState = CursorLockMode.Locked;
@@ -30,7 +28,7 @@ public class MouseLook : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
     void LateUpdate()
     {
         if (!isSettingPanelActive)
@@ -52,7 +50,7 @@ public class MouseLook : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -30f, 30f);
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.localRotation = Quaternion.Euler(xRotation-15f, 0f, 0f); // I added 15 degree bias;
     }
 
     void CanLook(bool value)
