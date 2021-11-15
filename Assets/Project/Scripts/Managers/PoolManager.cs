@@ -20,7 +20,13 @@ public class PoolManager : MonoBehaviour
         {
             GameObject instance = Instantiate(Resources.Load(name, typeof(GameObject)), transform) as GameObject;
             instance.transform.localScale *= data.SizeScaleFactor;
-            instance.GetComponent<BulletBehaviour>().explosionTimer = data.ExplosionTimer;                     
+
+            instance.GetComponent<BulletBehaviour>().explosionTimerIsActive = data.ExplosionTimerIsActive;
+
+            if (data.ExplosionTimerIsActive)
+            {                
+                instance.GetComponent<BulletBehaviour>().explosionTimer = data.ExplosionTimer;
+            }                   
 
             if (data.Color =="red")
             {
@@ -30,6 +36,7 @@ public class PoolManager : MonoBehaviour
             {
                 instance.GetComponent<MeshRenderer>().material.color = Color.black;
             }
+
             instance.SetActive(false);
             bulletList.Add(instance);
         }

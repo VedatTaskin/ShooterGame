@@ -10,18 +10,37 @@ public class MenuControl : MonoBehaviour
     [HideInInspector] public string color;
     [HideInInspector] public int sizeScale;
     [HideInInspector] public float explosionTimer;
+    [HideInInspector] public bool explosionTimerIsActive;
+
+    [SerializeField] private GameDataSO data;
+
     [SerializeField] Button colorButton;
     [SerializeField] Text sizeScaleText;
     [SerializeField] Slider timerSlider;
+    [SerializeField] GameObject timerSliderGO;
     [SerializeField] Text timerText;
+    [SerializeField] Text explosionActivateButtonText;
 
-    [SerializeField] private GameDataSO data;
 
     private void Start()
     {
         color = data.Color;
         sizeScale = data.SizeScaleFactor;
         explosionTimer = data.ExplosionTimer;
+        explosionTimerIsActive = data.ExplosionTimerIsActive;
+
+
+        // open - close explosion timer
+        if (!explosionTimerIsActive)
+        {
+            timerSliderGO.SetActive(false);
+            explosionActivateButtonText.text = "Activate";
+        }
+        else
+        {
+            timerSliderGO.SetActive(true);
+            explosionActivateButtonText.text = "Deactivate";
+        }
 
 
         // set color
@@ -48,6 +67,7 @@ public class MenuControl : MonoBehaviour
         data.Color = color;
         data.SizeScaleFactor = sizeScale;
         data.ExplosionTimer = explosionTimer;
+        data.ExplosionTimerIsActive = explosionTimerIsActive;
         SaveManager.SaveData(data);
         SceneManager.LoadScene("Level 1");
     }
@@ -74,6 +94,23 @@ public class MenuControl : MonoBehaviour
         }
         sizeScale++;
         sizeScaleText.text = sizeScale.ToString();        
+    }
+    
+    public void ToggleExplosionTimer()
+    {
+        if (!explosionTimerIsActive)
+        {
+            timerSliderGO.SetActive(true);
+            explosionTimerIsActive = true;
+            explosionActivateButtonText.text = "Deactivate";
+        }
+        else
+        {
+            timerSliderGO.SetActive(false);
+            explosionTimerIsActive = false;
+            explosionActivateButtonText.text = "Activate";
+        }
+
     }
 
     public void SetExplosionTimer()

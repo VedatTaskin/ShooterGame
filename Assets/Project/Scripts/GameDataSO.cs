@@ -9,4 +9,5 @@ public class GameDataSO : ScriptableObject
     public int SizeScaleFactor;
     public float ExplosionTimer;
     public string Color;
+    public bool ExplosionTimerIsActive;
 }
